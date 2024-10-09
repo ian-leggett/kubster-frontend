@@ -1,0 +1,49 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "simple-import-sort",
+    "react-hooks",
+    "prettier"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "ignorePatterns": ["node_modules"],
+  "rules": {
+    "prettier/prettier": 2 ,
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "off",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1
+      }
+    ],
+    "no-undef": "error",
+    "no-console": ["error", { "allow": ["assert", "info"] }],
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [["^react"], ["^antd"], ["^@?\\w"], ["@/(.*)"], ["^[./]"]]
+      }
+    ],
+    "@typescript-eslint/ban-ts-comment": "off"
+  },
+  "parserOptions": {
+    "warnOnUnsupportedTypeScriptVersion": false
+  },
+  "overrides": [
+    {
+      "files": ["**/*.{js,jsx,tsx,ts}"]
+    }
+  ],
+  "env": { "browser": true, "jest": true, "node": true }
+}
