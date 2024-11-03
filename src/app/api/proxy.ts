@@ -1,8 +1,13 @@
 import { getToken } from '@/lib/auth';
 
+type Headers = {
+  'Content-Type': 'application/json';
+  Accept: 'application/json';
+  Authorization?: string;
+};
 export default class ApiProxy {
-  static async getHeaders(requireAuth) {
-    const headers = {
+  static async getHeaders(requireAuth: boolean) {
+    const headers: Headers = {
       'Content-Type': 'application/json',
       Accept: 'application/json'
     };
@@ -13,7 +18,10 @@ export default class ApiProxy {
     return headers;
   }
 
-  static async handleFetch(endpoint, requestOptions) {
+  static async handleFetch<T extends object>(
+    endpoint: string,
+    requestOptions: T
+  ) {
     let data = {};
     let status = 500;
     try {
@@ -27,7 +35,11 @@ export default class ApiProxy {
     return { data, status };
   }
 
-  static async put(endpoint, object, requireAuth) {
+  static async put<T extends object>(
+    endpoint: string,
+    object: T,
+    requireAuth: boolean
+  ) {
     const jsonData = JSON.stringify(object);
     const headers = await ApiProxy.getHeaders(requireAuth);
     const requestOptions = {
@@ -38,7 +50,7 @@ export default class ApiProxy {
     return await ApiProxy.handleFetch(endpoint, requestOptions);
   }
 
-  static async delete(endpoint, requireAuth) {
+  static async delete(endpoint: string, requireAuth: boolean) {
     const headers = await ApiProxy.getHeaders(requireAuth);
     const requestOptions = {
       method: 'DELETE',
@@ -47,7 +59,11 @@ export default class ApiProxy {
     return await ApiProxy.handleFetch(endpoint, requestOptions);
   }
 
-  static async post(endpoint, object, requireAuth) {
+  static async post<T extends object>(
+    endpoint: string,
+    object: T,
+    requireAuth: boolean
+  ) {
     const jsonData = JSON.stringify(object);
     const headers = await ApiProxy.getHeaders(requireAuth);
     const requestOptions = {
@@ -58,7 +74,7 @@ export default class ApiProxy {
     return await ApiProxy.handleFetch(endpoint, requestOptions);
   }
 
-  static async get(endpoint, requireAuth) {
+  static async get(endpoint: string, requireAuth: boolean) {
     const headers = await ApiProxy.getHeaders(requireAuth);
     const requestOptions = {
       method: 'GET',

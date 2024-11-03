@@ -14,30 +14,32 @@ import {
 import { Input } from '@/components/ui/Input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/Sheet';
 
-import { useAuth } from '../authProvider';
 import navLinks, { nonUserLinks } from './navLinks';
 
-function BrandLink({ overrideClass }) {
+function BrandLink({ overrideClass }: { overrideClass?: string }) {
   overrideClass = overrideClass
     ? overrideClass
     : 'flex items-center gap-2 text-lg font-semibold md:text-base';
   return (
-    <Link href="#" className={overrideClass}>
+    <Link href="/" className={overrideClass}>
       <Package2 className="h-6 w-6" />
       <span>Kubster</span>
     </Link>
   );
 }
 
-export default function NavBar() {
-  const auth = useAuth();
+export default function NavBar({
+  isAuthenticated
+}: {
+  isAuthenticated: boolean;
+}) {
   const router = useRouter();
   return (
     <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <BrandLink />
         {navLinks.map((NavLinkItem, idx) => {
-          const shouldHide = !auth.isAuthenticated && NavLinkItem.authRequired;
+          const shouldHide = !isAuthenticated && NavLinkItem.authRequired;
           return shouldHide ? null : (
             <Link
               href={NavLinkItem.href}
@@ -61,8 +63,7 @@ export default function NavBar() {
             <BrandLink overrideClass="flex items-center gap-2 text-lg font-semibold" />
 
             {navLinks.map((NavLinkItem, idx) => {
-              const shouldHide =
-                !auth.isAuthenticated && NavLinkItem.authRequired;
+              const shouldHide = !isAuthenticated && NavLinkItem.authRequired;
               return shouldHide ? null : (
                 <Link
                   href={NavLinkItem.href}
@@ -73,7 +74,7 @@ export default function NavBar() {
                 </Link>
               );
             })}
-            {auth.isAuthenticated ? (
+            {isAuthenticated ? (
               <Link href="/logout" className="hover:text-foreground">
                 Logout
               </Link>
@@ -107,7 +108,7 @@ export default function NavBar() {
             />
           </div>
         </form>
-        {auth.isAuthenticated ? (
+        {isAuthenticated ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
@@ -116,9 +117,7 @@ export default function NavBar() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>
-                {auth.username ? auth.username : 'Account'}
-              </DropdownMenuLabel>
+              <DropdownMenuLabel>Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => router.push('/logout')}>
                 Logout

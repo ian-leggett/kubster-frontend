@@ -1,9 +1,23 @@
 'use client';
-import { createContext, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState
+} from 'react';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-const AuthContext = createContext(null);
+type AuthContextType = {
+  username: string;
+  isAuthenticated: boolean;
+  login: (username: string) => void;
+  logout: () => void;
+  loginRequiredRedirect: () => void;
+};
+
+const AuthContext = createContext<AuthContextType | null>(null);
 
 const LOGIN_REDIRECT_URL = '/';
 const LOGOUT_REDIRECT_URL = '/login';
@@ -11,7 +25,7 @@ const LOGIN_REQUIRED_URL = '/login';
 const LOCAL_STORAGE_KEY = 'is-logged-in';
 const LOCAL_USERNAME_KEY = 'username';
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
   const router = useRouter();
@@ -29,7 +43,7 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const login = (username) => {
+  const login = (username: string) => {
     setIsAuthenticated(true);
     if (username) {
       localStorage.setItem(LOCAL_USERNAME_KEY, username);

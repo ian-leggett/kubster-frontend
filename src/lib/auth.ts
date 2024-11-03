@@ -11,13 +11,11 @@ export function getToken() {
 }
 
 export function getRefreshToken() {
-  // API requests
   const myRefreshAuthToken = cookies().get(TOKEN_REFRESH_NAME);
   return myRefreshAuthToken?.value;
 }
 
 export function setToken(authToken) {
-  // Login
   cookies().set({
     name: TOKEN_NAME,
     value: authToken,
@@ -29,7 +27,6 @@ export function setToken(authToken) {
 }
 
 export function setRefreshToken(authRefreshToken) {
-  // Login
   cookies().set({
     name: TOKEN_REFRESH_NAME,
     value: authRefreshToken,
@@ -41,7 +38,6 @@ export function setRefreshToken(authRefreshToken) {
 }
 
 export function deleteToken() {
-  // Logout
   cookies().delete(TOKEN_REFRESH_NAME);
   return cookies().delete(TOKEN_NAME);
 }

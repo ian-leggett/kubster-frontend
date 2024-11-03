@@ -2,20 +2,15 @@ export const navLinks = [
   {
     label: 'Dashboard',
     authRequired: false,
-    href: '/'
-  },
-  {
-    label: 'Waitlist',
-    authRequired: true,
-    href: 'waitlists'
+    href: '/dashboard'
   }
 ];
 
 export const nonUserLinks = [
   {
-    label: 'Signup',
+    label: 'Register',
     authRequired: false,
-    href: '/signup'
+    href: '/register'
   },
   {
     label: 'Login',

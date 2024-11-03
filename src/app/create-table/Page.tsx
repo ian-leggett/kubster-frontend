@@ -9,7 +9,6 @@ import { useSearchParams } from 'next/navigation';
 import { z } from 'zod';
 
 import { useAuth } from '@/components/authProvider';
-import BaseLayout from '@/components/layout/BaseLayout';
 import { Button } from '@/components/ui/Button';
 import {
   Card,
@@ -52,7 +51,6 @@ const formSchema = z.object({
 
 export default function Page() {
   const [error, setError] = useState<null | string>(null);
-  const [isFetching, setFetching] = useState<boolean>(false);
   const auth = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -75,73 +73,62 @@ export default function Page() {
       body: JSON.stringify(values)
     };
     try {
-      setFetching(true);
       const response = await fetch(LOGIN_URL, requestOptions);
-      setFetching(false);
       data = await response.json();
       if (response.ok) {
         auth?.login(data?.email);
-        router.replace('/dashboard');
+        router.replace('/');
       }
     } catch (error) {
       setError(`Ooops something went wrong: ${error}`);
     }
   }
   return (
-    <BaseLayout>
-      <div className="mx-auto max-w-sm">
-        {error && <Notification title="Error" message={error} error />}
-        {hasRegistered && (
-          <Notification
-            title="Registered"
-            message=" Thank you for registering. Please now login."
-          />
-        )}
-        <Card className="mx-auto ">
-          <CardHeader>
-            <CardTitle className="text-2xl">Login</CardTitle>
-            <CardDescription>
-              Enter your email below to login to your account
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-8"
-              >
-                <FormField
-                  control={form.control}
-                  disabled={isFetching}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <Input placeholder="Your email" {...field} />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  disabled={isFetching}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Password</FormLabel>
-                      <Input placeholder="" type="password" {...field} />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit" disabled={isFetching}>
-                  Submit
-                </Button>
-              </form>
-            </Form>
-          </CardContent>
-        </Card>
-      </div>
-    </BaseLayout>
+    <div className="mx-auto max-w-sm">
+      {error && <Notification title="Error" message={error} error />}
+      {hasRegistered && (
+        <Notification
+          title="Registered"
+          message=" Thank you for registering. Please now login."
+        />
+      )}
+      <Card className="mx-auto ">
+        <CardHeader>
+          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardDescription>
+            Enter your email below to login to your account
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <Input placeholder="Your email" {...field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <Input placeholder="" type="password" {...field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit">Submit</Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
