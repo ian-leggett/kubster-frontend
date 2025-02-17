@@ -9,7 +9,6 @@ import { useSearchParams } from 'next/navigation';
 import { z } from 'zod';
 
 import { useAuth } from '@/components/authProvider';
-import BaseLayout from '@/components/layout/BaseLayout';
 import { Button } from '@/components/ui/Button';
 import {
   Card,
@@ -27,11 +26,10 @@ import {
 } from '@/components/ui/Form';
 import { Input } from '@/components/ui/Input';
 import Notification from '@/components/ui/Notification';
+import { NEXT_ENDPOINTS } from '@/config/default';
 export const description =
   // eslint-disable-next-line prettier/prettier
   'A login form with email and password. There\'s an option to login with Google and a link to sign up if you don\'t have an account.';
-
-const LOGIN_URL = '/api/login/';
 
 type ApiResponse = {
   email: string;
@@ -76,7 +74,7 @@ export default function Page() {
     };
     try {
       setFetching(true);
-      const response = await fetch(LOGIN_URL, requestOptions);
+      const response = await fetch(NEXT_ENDPOINTS.login, requestOptions);
       setFetching(false);
       data = await response.json();
       if (response.ok) {
@@ -88,7 +86,7 @@ export default function Page() {
     }
   }
   return (
-    <BaseLayout>
+    <div isAuthenticated={false}>
       <div className="mx-auto max-w-sm">
         {error && <Notification title="Error" message={error} error />}
         {hasRegistered && (
@@ -142,6 +140,6 @@ export default function Page() {
           </CardContent>
         </Card>
       </div>
-    </BaseLayout>
+    </div>
   );
 }

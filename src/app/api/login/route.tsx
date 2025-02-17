@@ -1,32 +1,30 @@
-// @ts-nocheck
 'use server';
 
 import { NextResponse } from 'next/server';
 
-import { DJANGO_API_ENDPOINT } from '@/config/default';
+import { DJANGO_ENDPOINTS } from '@/config/default';
 import { setRefreshToken, setToken } from '@/lib/auth';
 
 import ApiProxy from '../proxy';
 
-const DJANGO_API_LOGIN_URL = `${DJANGO_API_ENDPOINT}/token/pair`;
+type Data = {
+  data: { email: string; access: string; refresh: string };
+  status: number;
+};
 
-export async function POST(req) {
-  const requestPayload = await req.json();
+export async function POST(request: Request) {
+  const requestPayload = await request.json();
 
-  const { data, status } = await ApiProxy.post(
-    DJANGO_API_LOGIN_URL,
+  const { data, status } = (await ApiProxy.post(
+    DJANGO_ENDPOINTS.token.tokenPair,
     requestPayload,
     true
-  );
-
+  )) as Data;
   if (status === 200) {
-    const { username, access, refresh } = data;
+    const { email, access, refresh } = data;
     setToken(access);
     setRefreshToken(refresh);
-    return NextResponse.json(
-      { loggedIn: true, username: username },
-      { status: 200 }
-    );
+    return NextResponse.json({ loggedIn: true, email }, { status: 200 });
   }
   return NextResponse.json({ loggedIn: false, ...data }, { status: 401 });
 }

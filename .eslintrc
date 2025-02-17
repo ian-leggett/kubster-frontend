@@ -45,5 +45,5 @@
       "files": ["**/*.{js,jsx,tsx,ts}"]
     }
   ],
-  "env": { "browser": true, "jest": true, "node": true }
+  "env": { "browser": true, "jest": true, "node": true },
 }

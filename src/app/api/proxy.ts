@@ -1,5 +1,19 @@
 import { getToken } from '@/lib/auth';
 
+export type APIResponse = {
+  data: object;
+  error?: string;
+  message?: string;
+  status: number;
+};
+
+type RequestOptions = {
+  method: string;
+  headers: Headers;
+  // eslint-disable-next-line no-undef
+  body?: BodyInit | null | undefined;
+};
+
 type Headers = {
   'Content-Type': 'application/json';
   Accept: 'application/json';
@@ -9,7 +23,8 @@ export default class ApiProxy {
   static async getHeaders(requireAuth: boolean) {
     const headers: Headers = {
       'Content-Type': 'application/json',
-      Accept: 'application/json'
+      Accept: 'application/json',
+      'Access-Control-Allow-Credentials': 'true'
     };
     const authToken = getToken();
     if (authToken && requireAuth === true) {
@@ -18,10 +33,10 @@ export default class ApiProxy {
     return headers;
   }
 
-  static async handleFetch<T extends object>(
+  static async handleFetch(
     endpoint: string,
-    requestOptions: T
-  ) {
+    requestOptions: RequestOptions
+  ): Promise<APIResponse> {
     let data = {};
     let status = 500;
     try {
@@ -35,11 +50,7 @@ export default class ApiProxy {
     return { data, status };
   }
 
-  static async put<T extends object>(
-    endpoint: string,
-    object: T,
-    requireAuth: boolean
-  ) {
+  static async put(endpoint: string, object: unknown, requireAuth: boolean) {
     const jsonData = JSON.stringify(object);
     const headers = await ApiProxy.getHeaders(requireAuth);
     const requestOptions = {
@@ -59,14 +70,10 @@ export default class ApiProxy {
     return await ApiProxy.handleFetch(endpoint, requestOptions);
   }
 
-  static async post<T extends object>(
-    endpoint: string,
-    object: T,
-    requireAuth: boolean
-  ) {
+  static async post(endpoint: string, object: unknown, requireAuth: boolean) {
     const jsonData = JSON.stringify(object);
     const headers = await ApiProxy.getHeaders(requireAuth);
-    const requestOptions = {
+    const requestOptions: RequestOptions = {
       method: 'POST',
       headers: headers,
       body: jsonData

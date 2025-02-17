@@ -1,19 +1,16 @@
-// @ts-nocheck
 'use server';
 
 import { NextResponse } from 'next/server';
 
-import { DJANGO_API_ENDPOINT } from '@/config/default';
+import { DJANGO_ENDPOINTS } from '@/config/default';
 
 import ApiProxy from '../proxy';
 
-const DJANGO_REGISTER_URL = `${DJANGO_API_ENDPOINT}/register`;
-
-export async function POST(req) {
+export async function POST(req: Request) {
   const requestPayload = await req.json();
 
   const { data, status } = await ApiProxy.post(
-    DJANGO_REGISTER_URL,
+    DJANGO_ENDPOINTS.accounts.register,
     requestPayload,
     true
   );
@@ -21,5 +18,5 @@ export async function POST(req) {
   if (status === 200) {
     return NextResponse.json({ status: 200, ...data });
   }
-  return NextResponse.json({ registered: false, ...data }, { status: 401 });
+  return NextResponse.json({ registered: false, ...data }, { status });
 }

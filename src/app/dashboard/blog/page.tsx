@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Kubster dashboard'
+  title: 'Blog'
 };
 
 export default function Page() {
-  return <>moo</>;
+  return <>blog</>;
 }

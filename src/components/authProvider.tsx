@@ -10,7 +10,6 @@ import {
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 type AuthContextType = {
-  username: string;
   isAuthenticated: boolean;
   login: (username: string) => void;
   logout: () => void;
@@ -23,11 +22,9 @@ const LOGIN_REDIRECT_URL = '/';
 const LOGOUT_REDIRECT_URL = '/login';
 const LOGIN_REQUIRED_URL = '/login';
 const LOCAL_STORAGE_KEY = 'is-logged-in';
-const LOCAL_USERNAME_KEY = 'username';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState('');
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -37,20 +34,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const storedAuthStatusInt = parseInt(storedAuthStatus);
       setIsAuthenticated(storedAuthStatusInt === 1);
     }
-    const storedUsername = localStorage.getItem(LOCAL_USERNAME_KEY);
-    if (storedUsername) {
-      setUsername(storedUsername);
-    }
   }, []);
 
-  const login = (username: string) => {
+  const login = () => {
     setIsAuthenticated(true);
-    if (username) {
-      localStorage.setItem(LOCAL_USERNAME_KEY, username);
-      setUsername(username);
-    } else {
-      localStorage.removeItem(LOCAL_USERNAME_KEY);
-    }
     localStorage.setItem(LOCAL_STORAGE_KEY, '1');
     const nextUrl = searchParams.get('next');
     const invalidNextUrl = ['/login', '/logout'];
@@ -82,7 +69,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return (
     <AuthContext.Provider
       value={{
-        username,
         isAuthenticated,
         login,
         logout,
