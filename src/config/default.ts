@@ -8,7 +8,7 @@ export const DJANGO_PORT = process.env.DJANGO_PORT
 
 export const DJANGO_BASE_URL = process.env.DJANGO_BASE_URL
   ? process.env.DJANGO_BASE_URL
-  : `http://localhost:${DJANGO_PORT}`;
+  : `http://localhost`;
 
 export const NEXT_API_ENDPOINT = `${NEXT_BASE_URL}/api`;
 export const DJANGO_API_ENDPOINT = `${DJANGO_BASE_URL}/api/v1`;

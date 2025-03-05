@@ -2,9 +2,9 @@ import Link from 'next/link';
 
 const Summary = () => {
   return (
-    <div className="mt-20">
+    <>
       <h1 className="text-3xl pb-2 font-normal">
-        <span className="inline-block text-primary text-slate-900 font-bold motion-opacity-in-0 motion-translate-y-in-100 motion-blur-in motion-delay-[500ms]">
+        <span className="inline-block text-slate-600 font-bold motion-opacity-in-0 motion-translate-y-in-100 motion-blur-in motion-delay-[500ms]">
           Hi, my name is Ian Leggett
         </span>
       </h1>
@@ -21,7 +21,7 @@ const Summary = () => {
           Want to know more?
         </Link>
       </p>
-    </div>
+    </>
   );
 };
 

@@ -24,7 +24,11 @@ const DarkIcon = () => (
   </svg>
 );
 
-const ThemeSwitch = () => {
+type ThemeSwitchProps = {
+  className?: string;
+};
+
+const ThemeSwitch = ({ className = '' }: ThemeSwitchProps) => {
   const { theme, setTheme } = useTheme();
   const switchTheme = () => {
     if (theme === 'dark') {
@@ -34,26 +38,23 @@ const ThemeSwitch = () => {
   };
 
   return (
-    <span className="relative whitespace-nowrap py-1">
-      <span className="absolute bg-slate-600 -left-2 -top-1 -bottom-[5px] -right-2 md:-left-3 md:-top-0 md:-bottom-0 md:-right-3 -rotate-3"></span>
-      <span className="relative text-slate-200">
-        <input
-          type="checkbox"
-          name="light-switch"
-          className="light-switch sr-only"
-          id="light-switch"
-          onChange={switchTheme}
-        />
-        <label
-          className={'relative grid cursor-pointer hover:motion-scale-out-125'}
-          htmlFor="light-switch"
-        >
-          <LightIcon />
-          <DarkIcon />
-          <span className="sr-only">Switch to light / dark version</span>
-        </label>
-      </span>
-    </span>
+    <div className="text-slate-200">
+      <input
+        type="checkbox"
+        name="light-switch"
+        className="light-switch sr-only"
+        id="light-switch"
+        onChange={switchTheme}
+      />
+      <label
+        className={'relative grid cursor-pointer hover:motion-scale-out-125'}
+        htmlFor="light-switch"
+      >
+        <LightIcon />
+        <DarkIcon />
+        <span className="sr-only">Switch to light / dark version</span>
+      </label>
+    </div>
   );
 };
 
