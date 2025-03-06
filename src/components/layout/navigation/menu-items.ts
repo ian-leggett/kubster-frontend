@@ -1,14 +1,29 @@
-const menuItems = {
-  navMain: [
+interface MenuItem {
+  title: string;
+  route: string;
+  prefetch: boolean;
+}
+
+interface MenuItems {
+  primaryNavigation: MenuItem[];
+}
+
+const menuItems: MenuItems = {
+  primaryNavigation: [
     {
-      title: 'Blog',
-      url: '/dashboard/blog',
-      items: [
-        {
-          title: 'Watches',
-          url: '/dashboard/blog/watches'
-        }
-      ]
+      title: 'Home',
+      route: '/',
+      prefetch: true
+    },
+    {
+      title: 'About',
+      route: '/about',
+      prefetch: true
+    },
+    {
+      title: 'Contact',
+      route: '/contact',
+      prefetch: true
     }
   ]
 };

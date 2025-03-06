@@ -24,21 +24,14 @@ const DarkIcon = () => (
   </svg>
 );
 
-type ThemeSwitchProps = {
-  className?: string;
-};
-
-const ThemeSwitch = ({ className = '' }: ThemeSwitchProps) => {
+const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme();
   const switchTheme = () => {
-    if (theme === 'dark') {
-      return setTheme('light');
-    }
-    return setTheme('dark');
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   return (
-    <div className="text-slate-200">
+    <div className="hidden md:block text-slate-200">
       <input
         type="checkbox"
         name="light-switch"

@@ -3,18 +3,12 @@ import Link from 'next/link';
 
 import mugshot from './me.jpg';
 
-interface ProfileCardProps {
-  className?: string;
-}
-
-const ProfileCard = ({ className }: ProfileCardProps) => {
+const ProfileCard = () => {
   return (
-    <div
-      className={`absolute left-10 top-[70px] z-[11] w-[400px] group ${className}`}
-    >
-      <div className="rounded-lg -mt-16 p-1 bg-gray-600 relative origin-center -rotate-6 duration-500 group-hover:rotate-0 shadow-xl shadow-gray-500/50 motion-translate-y-in-100 motion-rotate-in-180 motion-blur-in">
-        <div className="rounded-lg p-4 grid grid-cols-[auto_1fr_auto] bg-gray-800 border-solid border border-slate-500">
-          <div className="relative rounded-full w-[70px] h-[70px] border-solid border border-slate-300 border-2 hover:border-light-blue mr-5">
+    <div className="absolute md:left-1 md:top-[70px] z-[11] md:w-[400px] group">
+      <div className="rounded-lg md:-mt-[3rem] p-1 bg-gray-600 relative origin-center md:-rotate-6 duration-500 group-hover:rotate-0 md:shadow-xl md:shadow-gray-500/50 motion-translate-y-in-100 motion-rotate-in-180 motion-blur-in">
+        <div className="rounded-lg p-3 md:p-4 grid grid-cols-[70px_1fr] md:grid-cols-[auto_1fr_auto] bg-gray-800 border-solid border border-slate-500">
+          <div className="relative rounded-full w-[60px] h-[60px] md:w-[70px] md:h-[70px] border-solid border border-slate-300 border-2 hover:border-light-blue mr-5">
             <Link href="/" className="group-hover:motion-scale-in-0">
               <Image
                 src={mugshot}
@@ -42,7 +36,7 @@ const ProfileCard = ({ className }: ProfileCardProps) => {
                 </a>
               </li>
             </ul>
-            <div className="flex gap-[7px]">
+            <div className="hidden md:flex gap-[7px]">
               <a
                 className="[&>svg]:h-8 [&>svg]:w-8 cursor-pointer"
                 title="Visit Github profile"
@@ -71,7 +65,7 @@ const ProfileCard = ({ className }: ProfileCardProps) => {
               </a>
             </div>
           </div>
-          <span className="flex w-2 h-2 bg-green-500 rounded-full"></span>
+          <span className="hidden md:block w-2 h-2 bg-green-500 rounded-full"></span>
         </div>
       </div>
     </div>

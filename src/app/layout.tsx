@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} min-h-screen sm:px-5 md:px-10 lg:px-10 py-10 relative bg-gradient-to-br from-cyan-500 to-blue-500 dark:bg-gradient-to-br dark:from-slate-900 dark:to-slate-800`}
+        className={`${inter.className} min-h-screen px-3 md:px-5 lg:px-10 py-2 lg:py-10 relative bg-gradient-to-br from-cyan-500 to-blue-500 dark:bg-gradient-to-br dark:from-slate-900 dark:to-slate-800`}
       >
         <Provider store={store}>
           <ThemeProvider
@@ -36,9 +36,9 @@ export default function RootLayout({
               <div className="mx-auto sm:w-full md:w-full xl:w-2/3">
                 <Header />
                 <div className="relative">
-                  <div className="absolute inset-0 -top-3 origin-bottom-left -rotate-1 rounded-xl border-gray-300 bg-[#fee09a] motion-rotate-in-1"></div>
-                  <div className="relative z-10 size-full border border-b rounded-xl border-gray-300 bg-gray-50 p-10 mt-5">
-                    <main className="pt-20">{children}</main>
+                  <div className="hidden md:block absolute inset-0 origin-bottom-left -rotate-1 rounded-xl border-gray-300 bg-[#fee09a] motion-rotate-in-1"></div>
+                  <div className="relative top-8 md:top-0 z-10 size-full border border-b rounded-xl border-gray-300 bg-gray-50 p-5 md:p-10 mt-5">
+                    <main className="pt-[10px] md:pt-[80px]">{children}</main>
                   </div>
                 </div>
                 <Footer />
