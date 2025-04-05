@@ -21,6 +21,16 @@ const menuItems: MenuItems = {
       prefetch: true
     },
     {
+      title: 'Blog',
+      route: '/blog',
+      prefetch: true
+    },
+    {
+      title: 'CV',
+      route: '/cv',
+      prefetch: true
+    },
+    {
       title: 'Contact',
       route: '/contact',
       prefetch: true

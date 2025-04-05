@@ -1,32 +1,58 @@
 import Image from 'next/image';
 import Link from 'next/link';
+const HomeIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke=""
+    className="stroke-light-blue hidden size-9 lg:size-11 -rotate-6 group-hover:rotate-0 group-hover:block group-hover:motion-scale-in-0"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+    />
+  </svg>
+);
 
-import mugshot from './me.jpg';
+import mugshot from '/public/images/me.jpg';
 
 const ProfileCard = () => {
   return (
-    <div className="absolute md:left-1 md:top-[70px] z-[11] md:w-[400px] group">
-      <div className="rounded-lg md:-mt-[3rem] p-1 bg-gray-600 relative origin-center md:-rotate-6 duration-500 group-hover:rotate-0 md:shadow-xl md:shadow-gray-500/50 motion-translate-y-in-100 motion-rotate-in-180 motion-blur-in">
-        <div className="rounded-lg p-3 md:p-4 grid grid-cols-[70px_1fr] md:grid-cols-[auto_1fr_auto] bg-gray-800 border-solid border border-slate-500">
-          <div className="relative rounded-full w-[60px] h-[60px] md:w-[70px] md:h-[70px] border-solid border border-slate-300 border-2 hover:border-light-blue mr-5">
-            <Link href="/" className="group-hover:motion-scale-in-0">
+    <div className="group">
+      <div className="rounded-lg md:mt-3 p-1 bg-gray-600 relative z-10 origin-center md:-rotate-6 duration-500 group-hover:rotate-0 md:shadow-xl md:shadow-gray-500/50 dark:md:shadow-md dark:md:shadow-gray-500/50 motion-translate-y-in-100 motion-rotate-in-180 motion-blur-in">
+        <div className="rounded-lg p-3 md:grid md:grid-cols-[60px_1fr] lg:grid-cols-[auto_1fr_auto] bg-gray-800 border-solid border border-slate-500">
+          <div className="hidden md:block relative rounded-full w-[50px] h-[50px] lg:w-[70px] lg:h-[70px] border-solid border border-slate-300 border-2 hover:border-light-blue mr-5 transition duration-200">
+            <Link
+              href="/"
+              className="group/profile-pic flex items-center justify-center h-full w-full"
+              title="Take me home"
+            >
+              <HomeIcon />
               <Image
                 src={mugshot}
                 alt="A profile picture of the author"
                 width={60}
                 height={60}
-                className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-full"
+                className="w-[40px] lg:w-60 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-full group-hover/profile-pic:hidden transition duration-200"
               />
             </Link>
           </div>
           <div>
-            <h2 className="text-light-blue font-bold text-xl pb-1">
-              Full Stack Developer
+            <h2 className="text-light-blue font-bold text-[1.225rem] lg:text-xl pb-1">
+              <Link href="/" className="no-underline">
+                Full Stack Developer
+              </Link>
             </h2>
-            <ul className="pb-3 font-light text-white">
-              <li>Name: Ian Leggett</li>
+            <ul className="md:pb-3 font-light text-white">
               <li>
-                Email:{' '}
+                <span className="hidden lg:inline-block mr-2">Name: </span>Ian
+                Leggett
+              </li>
+              <li className="hidden md:block">
+                <span className="hidden lg:inline-block mr-2">Email: </span>
                 <a
                   href="mailto:contactleggett@gmail.com"
                   className="underline transition duration-300 ease-in-out text-white/70 hover:text-white/100"
@@ -38,7 +64,7 @@ const ProfileCard = () => {
             </ul>
             <div className="hidden md:flex gap-[7px]">
               <a
-                className="[&>svg]:h-8 [&>svg]:w-8 cursor-pointer"
+                className="[&>svg]:h-7 [&>svg]:w-7 lg:[&>svg]:h-10 lg:[&>svg]:w-10 cursor-pointer"
                 title="Visit Github profile"
                 href="https://github.com/ian-leggett"
               >
@@ -51,7 +77,7 @@ const ProfileCard = () => {
                 </svg>
               </a>
               <a
-                className="[&>svg]:h-8 [&>svg]:w-8 cursor-pointer"
+                className="[&>svg]:h-7 [&>svg]:w-7 lg:[&>svg]:h-10 lg:[&>svg]:w-10 cursor-pointer"
                 title="Visit LinkedIn profile"
                 href="https://www.linkedin.com/in/ianleggett/"
               >
@@ -65,7 +91,7 @@ const ProfileCard = () => {
               </a>
             </div>
           </div>
-          <span className="hidden md:block w-2 h-2 bg-green-500 rounded-full"></span>
+          <span className="hidden lg:block w-2 h-2 bg-green-500 rounded-full"></span>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import ProfileCard from './home/ProfileCard';
+import ProfileCard from '../components/layout/ProfileCard';
 import SoftwareIcons from './home/SoftwareIcons';
 import Summary from './home/Summary';
 

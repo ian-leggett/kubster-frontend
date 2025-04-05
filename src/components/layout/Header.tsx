@@ -1,9 +1,9 @@
-import ProfileCard from '@/app/home/ProfileCard';
+import ProfileCard from '@/components/layout/ProfileCard';
 
 import NavBar from './navigation/NavBar';
 
 const Header = () => (
-  <header className="relative pb-12">
+  <header className="flex justify-between pb-[85px] md:pb-12">
     <ProfileCard />
     <NavBar />
   </header>

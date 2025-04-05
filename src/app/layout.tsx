@@ -33,12 +33,12 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <AuthProvider>
-              <div className="mx-auto sm:w-full md:w-full xl:w-2/3">
+              <div className="mx-auto sm:w-full md:max-w-[1280px]">
                 <Header />
-                <div className="relative">
-                  <div className="hidden md:block absolute inset-0 origin-bottom-left -rotate-1 rounded-xl border-gray-300 bg-[#fee09a] motion-rotate-in-1"></div>
-                  <div className="relative top-8 md:top-0 z-10 size-full border border-b rounded-xl border-gray-300 bg-gray-50 p-5 md:p-10 mt-5">
-                    <main className="pt-[10px] md:pt-[80px]">{children}</main>
+                <div className="relative -mt-[80px] lg:-mt-[120px]">
+                  <div className="hidden md:block absolute inset-0 origin-bottom-left -rotate-1 rounded-xl border-gray-300 bg-note-yellow motion-rotate-in-1"></div>
+                  <div className="relative top-0 z-1 size-full border border-b rounded-xl border-gray-300 bg-white dark:bg- p-3 md:p-10 mt-5">
+                    <main className="pt-[10px] lg:pt-[80px]">{children}</main>
                   </div>
                 </div>
                 <Footer />
