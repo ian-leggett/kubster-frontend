@@ -38,6 +38,18 @@ type ApiResponse = {
 const formSchema = z
   .object({
     email: z.string().email().min(5).max(50),
+    firstName: z
+      .string()
+      .min(2, {
+        message: 'First name must be at least 2 charaters'
+      })
+      .max(50),
+    lastName: z
+      .string()
+      .min(2, {
+        message: 'Last name must be at least 2 charaters'
+      })
+      .max(50),
     password: z.string().min(1, {
       message: 'Please enter your password'
     }),
@@ -63,6 +75,8 @@ export default function Page() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
+      firstName: '',
+      lastName: '',
       password: '',
       confirmPassword: ''
     }
@@ -104,6 +118,28 @@ export default function Page() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="firstName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>First name</FormLabel>
+                    <Input placeholder="Your first name" {...field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="lastName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Last name</FormLabel>
+                    <Input placeholder="Your last name" {...field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="email"

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { z } from 'zod';
@@ -31,11 +32,6 @@ export const description =
   // eslint-disable-next-line prettier/prettier
   'A login form with email and password. There\'s an option to login with Google and a link to sign up if you don\'t have an account.';
 
-type ApiResponse = {
-  email: string;
-  password: string;
-};
-
 const formSchema = z.object({
   email: z
     .string()
@@ -49,12 +45,11 @@ const formSchema = z.object({
 });
 
 export default function Page() {
-  const [error, setError] = useState<null | string>(null);
-  const [isFetching, setFetching] = useState<boolean>(false);
-  const auth = useAuth();
+  // const [error, setError] = useState<null | string>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
   const hasRegistered = searchParams.get('registered');
+  const auth = useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,8 +58,8 @@ export default function Page() {
       password: ''
     }
   });
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    let data: ApiResponse;
+
+  const loginUser = async (values: z.infer<typeof formSchema>) => {
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -72,23 +67,30 @@ export default function Page() {
       },
       body: JSON.stringify(values)
     };
-    try {
-      setFetching(true);
-      const response = await fetch(NEXT_ENDPOINTS.login, requestOptions);
-      setFetching(false);
-      data = await response.json();
-      if (response.ok) {
-        auth?.login(data?.email);
-        router.replace('/dashboard');
+    const response = await fetch(NEXT_ENDPOINTS.login, requestOptions);
+    const data = await response.json();
+    if (response.ok) {
+      if (auth) {
+        auth.login();
       }
-    } catch (error) {
-      setError(`Ooops something went wrong: ${error}`);
+      router.replace('/dashboard');
+    } else {
+      throw new Error(data.error);
     }
-  }
+  };
+
+  const { mutate, isPending, isError, error } = useMutation({
+    mutationFn: loginUser
+  });
+
+  const onSubmit = (formData: z.infer<typeof formSchema>) => mutate(formData);
+
   return (
-    <div isAuthenticated={false}>
+    <div>
       <div className="mx-auto max-w-sm">
-        {error && <Notification title="Error" message={error} error />}
+        {isError && (
+          <Notification title="Error" message={error.message} error />
+        )}
         {hasRegistered && (
           <Notification
             title="Registered"
@@ -110,7 +112,7 @@ export default function Page() {
               >
                 <FormField
                   control={form.control}
-                  disabled={isFetching}
+                  disabled={isPending}
                   name="email"
                   render={({ field }) => (
                     <FormItem>
@@ -122,7 +124,7 @@ export default function Page() {
                 />
                 <FormField
                   control={form.control}
-                  disabled={isFetching}
+                  disabled={isPending}
                   name="password"
                   render={({ field }) => (
                     <FormItem>
@@ -132,7 +134,7 @@ export default function Page() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" disabled={isFetching}>
+                <Button type="submit" disabled={isPending}>
                   Submit
                 </Button>
               </form>

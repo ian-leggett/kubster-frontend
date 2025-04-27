@@ -20,16 +20,18 @@ const Nav = () => {
   return (
     <nav>
       <div className="md:hidden">
-        <button
-          onClick={toggleMenu}
-          className="text-white focus:outline-none relative z-[13] ml-auto"
-        >
-          {isOpen ? (
-            <XIcon className="h-9 w-9" />
-          ) : (
-            <MenuIcon className="h-9 w-9" />
-          )}
-        </button>
+        <div className="flex justify-center">
+          <button
+            onClick={toggleMenu}
+            className="text-white focus:outline-none relative z-[13] cursor-pointer"
+          >
+            {isOpen ? (
+              <XIcon className="h-9 w-9" />
+            ) : (
+              <MenuIcon className="h-9 w-9" />
+            )}
+          </button>
+        </div>
       </div>
       <ul
         className={`${isOpen ? 'block' : 'hidden'} absolute left-0 top-0 pt-10 h-screen w-full md:relative md:h-auto md:pt-0 bg-gray-900 z-[12] md:flex md:items-center p-1`}

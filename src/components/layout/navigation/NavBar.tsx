@@ -8,9 +8,9 @@ const NavBar = () => {
   return (
     <div>
       <div className="p-1 bg-gray-600 rounded-sm">
-        <div className="p-1 bg-gray-900 md:grid md:grid-cols-[1fr,50px]">
+        <div className="p-1 bg-gray-900 md:flex md:justify-between items-center">
           <Nav />
-          <ThemeSwitch />
+          <ThemeSwitch className="hidden md:display" />
         </div>
       </div>
     </div>

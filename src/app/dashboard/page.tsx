@@ -5,5 +5,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <>moo</>;
+  return <>Logged in</>;
 }

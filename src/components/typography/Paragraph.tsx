@@ -9,7 +9,12 @@ interface ParagraphProps {
 
 const Paragraph: React.FC<ParagraphProps> = ({ children, className }) => {
   return (
-    <p className={twMerge('text-gray-500 dark:text-white text-lg', className)}>
+    <p
+      className={twMerge(
+        'text-gray-500 dark:text-white text-lg pb-6',
+        className
+      )}
+    >
       {children}
     </p>
   );

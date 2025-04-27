@@ -1,40 +1,27 @@
 'use client';
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState
-} from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 type AuthContextType = {
   isAuthenticated: boolean;
-  login: (username: string) => void;
+  login: () => void;
   logout: () => void;
   loginRequiredRedirect: () => void;
 };
 
+const LOCAL_STORAGE_KEY = 'is-logged-in';
 const AuthContext = createContext<AuthContextType | null>(null);
 
 const LOGIN_REDIRECT_URL = '/';
 const LOGOUT_REDIRECT_URL = '/login';
 const LOGIN_REQUIRED_URL = '/login';
-const LOCAL_STORAGE_KEY = 'is-logged-in';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  useEffect(() => {
-    const storedAuthStatus = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (storedAuthStatus) {
-      const storedAuthStatusInt = parseInt(storedAuthStatus);
-      setIsAuthenticated(storedAuthStatusInt === 1);
-    }
-  }, []);
 
   const login = () => {
     setIsAuthenticated(true);
@@ -52,7 +39,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const loginRequiredRedirect = () => {
     setIsAuthenticated(false);
-    localStorage.setItem(LOCAL_STORAGE_KEY, '0');
     let loginWithNextUrl = `${LOGIN_REQUIRED_URL}?next=${pathname}`;
     if (LOGIN_REQUIRED_URL === pathname) {
       loginWithNextUrl = `${LOGIN_REQUIRED_URL}`;

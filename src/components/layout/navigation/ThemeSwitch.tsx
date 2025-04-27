@@ -1,4 +1,6 @@
+import { clsx } from 'clsx';
 import { useTheme } from 'next-themes';
+import { twMerge } from 'tailwind-merge';
 
 const LightIcon = () => (
   <svg
@@ -22,14 +24,18 @@ const DarkIcon = () => (
   </svg>
 );
 
-const ThemeSwitch = () => {
+interface ThemeSwitchProps {
+  className?: string;
+}
+
+const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
   const { theme, setTheme } = useTheme();
   const switchTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   return (
-    <div className="hidden md:block text-slate-200">
+    <div className={twMerge(clsx('md:block text-slate-200', className))}>
       <input
         type="checkbox"
         name="light-switch"
@@ -37,10 +43,7 @@ const ThemeSwitch = () => {
         id="light-switch"
         onChange={switchTheme}
       />
-      <label
-        className={'relative grid cursor-pointer hover:motion-scale-out-125'}
-        htmlFor="light-switch"
-      >
+      <label className={'relative grid cursor-pointer'} htmlFor="light-switch">
         <LightIcon />
         <DarkIcon />
         <span className="sr-only">Switch to light / dark version</span>

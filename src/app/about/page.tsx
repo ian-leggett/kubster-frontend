@@ -1,10 +1,6 @@
 import React from 'react';
 
-import Image from 'next/image';
-
 import { H1, H2 } from '@/components/typography/Heading';
-
-import mugshot from '/public/images/me.jpg';
 
 function About() {
   return (

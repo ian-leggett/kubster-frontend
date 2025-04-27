@@ -8,7 +8,7 @@ import ApiProxy from '../proxy';
 
 export async function GET() {
   const { data, status } = await ApiProxy.get(
-    DJANGO_ENDPOINTS.accounts.me,
+    DJANGO_ENDPOINTS.accounts.user,
     true
   );
 

@@ -17,16 +17,18 @@ type RequestOptions = {
 type Headers = {
   'Content-Type': 'application/json';
   Accept: 'application/json';
-  Authorization?: string;
+  Authorization: string;
+  'Access-Control-Allow-Credentials'?: string;
 };
 export default class ApiProxy {
   static async getHeaders(requireAuth: boolean) {
     const headers: Headers = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      'Access-Control-Allow-Credentials': 'true'
+      'Access-Control-Allow-Credentials': 'true',
+      Authorization: ''
     };
-    const authToken = getToken();
+    const authToken = await getToken();
     if (authToken && requireAuth === true) {
       headers['Authorization'] = `Bearer ${authToken}`;
     }
@@ -87,6 +89,8 @@ export default class ApiProxy {
       method: 'GET',
       headers: headers
     };
+
+    console.log('Request options:', requestOptions);
     return await ApiProxy.handleFetch(endpoint, requestOptions);
   }
 }
