@@ -35,7 +35,7 @@ export default function RootLayout({
               <div className="mx-auto sm:w-full md:max-w-[1280px]">
                 <Header />
                 <div className="relative -mt-[80px] lg:-mt-[120px]">
-                  <div className="hidden md:block absolute inset-0 origin-bottom-left -rotate-1 rounded-xl border-gray-300 bg-note-yellow dark:opacity-80"></div>
+                  <div className="hidden md:block absolute inset-0 origin-bottom-left -rotate-1 rounded-xl border-gray-300 bg-note-yellow dark:bg-gray-600"></div>
                   <div className="relative top-0 z-1 size-full border border-b rounded-xl border-gray-300 bg-white dark:bg-[#0e1120] dark:border-[#2a2a40] p-3 md:p-10 mt-5">
                     <main className="pt-[10px] lg:pt-[80px]">
                       <LoggedInStatus />

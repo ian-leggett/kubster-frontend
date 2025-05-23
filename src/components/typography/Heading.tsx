@@ -25,10 +25,11 @@ export const H2 = ({
 }: {
   children: React.ReactNode;
   className?: string;
+  icon?: React.ReactNode;
 }) => (
   <h2
     className={twMerge(
-      'text-3xl text-gray-500 dark:text-white font-light mb-7',
+      'text-3xl text-light-blue dark:text-white font-light mb-5',
       className
     )}
   >

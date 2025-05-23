@@ -1,4 +1,4 @@
-import ProfileCard from '@/components/layout/ProfileCard';
+import ProfileCard from '@/components/ui/ProfileCard';
 
 import NavBar from './navigation/NavBar';
 import ThemeSwitch from './navigation/ThemeSwitch';

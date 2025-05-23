@@ -16,9 +16,9 @@ function About() {
             <H2>Summary</H2>
             <Paragraph>
               I am a passionate Senior Full Stack Developer who thrives on
-              building intuitive, accessible web based applications. I have over
-              17 years’ commercial experience developing web applications for
-              top companies in domains such as insurance, gaming, finance,
+              building intuitive, accessible web based applications. I have
+              nearly 20 years commercial experience developing web applications
+              for top companies in domains such as insurance, gaming, finance,
               digital filming, academic publishing, public sector, government,
               telecoms and recruitment.
             </Paragraph>
@@ -38,10 +38,13 @@ function About() {
                 web-based applications.
               </li>
               <li className="mb-2">Designing and implementing RESTful APIs.</li>
+              <li className="mb-2">Rapid prototyping.</li>
               <li className="mb-2">
                 Building and maintaining CI/CD pipelines.
               </li>
-              <li className="mb-2">Leading the development.</li>
+              <li className="mb-2">
+                Leading development from prototype to production.
+              </li>
               <li className="mb-2">
                 Refining backlogs, failing fast and delivering MVP's.
               </li>
@@ -50,8 +53,8 @@ function About() {
                 efficiently.
               </li>
               <li className="mb-2">
-                Strong communicator and listener, engaging with both technical
-                and non-technical stakeholders.
+                Strong communicator, listener and excellent at engaging with
+                both technical and non-technical stakeholders.
               </li>
               <li className="mb-2">
                 Mentoring junior developers and apprentices.
@@ -66,7 +69,7 @@ function About() {
         <div className="order-1 md:order-2 flex flex-col items-center mt-[-70px]">
           <div className="relative rounded-full border-white w-[150px] h-[150px]">
             <Image
-              src="/images/me.jpg"
+              src="/images/me-cartoon.png"
               alt="Ian Leggett"
               width={150}
               height={150}

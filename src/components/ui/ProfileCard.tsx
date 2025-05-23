@@ -4,44 +4,42 @@ import Link from 'next/link';
 const ProfileCard = () => {
   return (
     <div className="group">
-      <div className="rounded-lg md:mt-3 p-1 bg-gray-600 relative z-10 origin-center md:-rotate-6 duration-500 group-hover:rotate-0 md:shadow-xl md:shadow-gray-500/50 dark:md:shadow-md dark:md:shadow-gray-500/50">
-        <div className="rounded-lg p-3 md:grid md:grid-cols-[60px_1fr] lg:grid-cols-[auto_1fr_auto] bg-gray-800 border-solid border border-slate-500">
-          <div className="hidden md:block relative rounded-full w-[50px] h-[50px] lg:w-[70px] lg:h-[70px] border-white/70 border-2 mr-5 transition duration-200 hover:border-white/100">
+      <div className="rounded-lg md:mt-3 p-1 bg-gray-600 relative z-10 origin-center md:-rotate-6 duration-500 group-hover:rotate-0 md:shadow-xl md:shadow-gray-500/50 dark:shadow-none min-w-[220px] md:min-w-[300px] lg:min-w-[350px]">
+        <div className="rounded-lg p-3 md:grid md:grid-cols-[auto_1fr_auto] bg-gray-800 border-solid border border-slate-500">
+          <div className="hidden md:block relative rounded-full w-[60px] h-[60px] lg:w-[80px] lg:h-[80px] border-white/70 border-2 mr-3 transition duration-200 hover:border-white/100">
             <Link
               href="/"
               className="group/profile-pic flex items-center justify-center h-full w-full"
-              title="Take me home"
+              title="Home"
             >
               <Image
-                src="/images/me.jpg"
+                src="/images/me-cartoon.png"
                 alt="A profile picture of the author"
-                width={60}
-                height={60}
-                className="w-[40px] lg:w-60 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-full transition duration-200"
+                width={80}
+                height={80}
+                className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-full transition duration-200"
               />
             </Link>
           </div>
           <div>
-            <h2 className="font-bold text-[1.225rem] lg:text-2xl pb-1">
-              <Link href="/" className="no-underline">
-                Full Stack Developer
+            <h2 className="font-bold text-[1.725rem] lg:text-2xl pb-1">
+              <Link
+                href="/"
+                className="no-underline text-light-blue hover:text-light-blue-hover"
+                title="Home"
+              >
+                Full Stack Ian
               </Link>
             </h2>
             <div className="md:block flex justify-between items-center">
-              <ul className="font-light text-white">
-                <li className="text-xl md:text-[1.1rem]">
-                  <span className="hidden lg:inline-block mr-2">Name: </span>Ian
+              <ul className="font-light text-white/70">
+                <li className="text-lg md:text-[1.1rem]">
+                  <span className="hidden md:inline-block mr-2">Name: </span>Ian
                   Leggett
                 </li>
-                <li className="hidden md:block text-[1.1rem]">
-                  <span className="hidden lg:inline-block mr-2">Email: </span>
-                  <a
-                    href="mailto:contactleggett@gmail.com"
-                    className="underline transition duration-300 ease-in-out text-white/70 hover:text-white/100"
-                    title="Get in contact"
-                  >
-                    contactleggett@gmail.com
-                  </a>
+                <li className="text-lg text-[1.1rem]">
+                  <span className="hidden md:inline-block mr-2">Location:</span>
+                  London, UK
                 </li>
               </ul>
               <div className="md:mt-2 flex gap-[7px]">
@@ -74,7 +72,7 @@ const ProfileCard = () => {
               </div>
             </div>
           </div>
-          <span className="hidden lg:block w-2 h-2 bg-green-500 rounded-full"></span>
+          <span className="hidden md:block w-2 h-2 bg-green-500 rounded-full"></span>
         </div>
       </div>
     </div>
