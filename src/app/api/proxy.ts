@@ -90,7 +90,6 @@ export default class ApiProxy {
       headers: headers
     };
 
-    console.log('Request options:', requestOptions);
     return await ApiProxy.handleFetch(endpoint, requestOptions);
   }
 }
